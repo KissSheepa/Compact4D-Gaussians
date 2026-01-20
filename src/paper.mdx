@@ -1,5 +1,5 @@
 ---
-title: "Compact4D : Efficient 4D Gaussian Splatting via Dynamic-Aware Sparsification and Merging"
+title: "Compact4D: Dual-Phase Decoupled Compaction for 4D Gaussian Splatting"
 authors:
   - name: Pengcheng Zhu
     url: https://github.com/KissSheepa
@@ -62,6 +62,18 @@ import { Comparison } from "./components/Comparison.tsx";
 import dogsDiffc from "./assets/dogs-diffc.png"
 import dogsTrue from "./assets/dogs-true.png"
 import dogsMsillm from "@/assets/dogs-msillm.jpg"
+import beefOurs from "./assets/beef-ours.png";
+import beefSwift from "./assets/beef-swift4d.png";
+import coffeeOurs from "./assets/coffee-ours.png";
+import coffeeSwift from "./assets/coffee-swift4d.png";
+import discussionOurs from "./assets/discussion-ours.png";
+import discussionSwift from "./assets/discussion-swift4d.png";
+import trimmingOurs from "./assets/trimming-ours.png";
+import trimmingSwift from "./assets/trimming-swift4d.png";
+import gz1Ours from "./assets/gz1-ours.png";
+import gz1Swift from "./assets/gz1-swift4d.png";
+import gz2Ours from "./assets/gz2-ours.png";
+import gz2Swift from "./assets/gz2-swift4d.png";
 
 
 
@@ -201,6 +213,7 @@ import dogsMsillm from "@/assets/dogs-msillm.jpg"
   </div>
 
 
+
   {/* ================= 第三行：Vru Basketball Dataset ================= */}
   <h3 className="text-xl font-bold text-center mb-4">Vru Basketball Dataset</h3>
 
@@ -209,18 +222,18 @@ import dogsMsillm from "@/assets/dogs-msillm.jpg"
     <div className="relative aspect-video">
       <div className="absolute top-2 left-2 z-10 bg-black/50 text-white px-2 py-1 text-xs rounded font-mono text-center">
         <div className="font-bold mb-0.5">Ours-Lite</div>
-        <div>XXMB, 0.XXX</div>
+        <div>30.78MB, 28.68PSNR</div>
       </div>
       <div className="absolute bottom-2 right-2 z-10 bg-black/50 text-white px-2 py-1 text-xs rounded font-mono text-center">
         <div className="font-bold mb-0.5">Swift4D</div>
-        <div>XXMB, 0.XXX</div>
+        <div>239MB, 29.03PSNR</div>
       </div>
       <Comparison client:visible>
         <video slot="itemOne" className="w-full h-full object-cover" autoPlay loop muted playsInline>
-          <source src="/vru_1_ours.mp4" type="video/mp4" />
+          <source src="/Compact4D-Gaussians/gz0-20_ours.mp4" type="video/mp4" />
         </video>
         <video slot="itemTwo" className="w-full h-full object-cover" autoPlay loop muted playsInline>
-          <source src="/vru_1_swift.mp4" type="video/mp4" />
+          <source src="/Compact4D-Gaussians/vru_1_swift.mp4" type="video/mp4" />
         </video>
       </Comparison>
     </div>
@@ -228,19 +241,15 @@ import dogsMsillm from "@/assets/dogs-msillm.jpg"
     {/* Vru - 视频 2 */}
     <div className="relative aspect-video">
       <div className="absolute top-2 left-2 z-10 bg-black/50 text-white px-2 py-1 text-xs rounded font-mono text-center">
-        <div className="font-bold mb-0.5">Ours-Lite</div>
-        <div>XXMB, 0.XXX</div>
       </div>
       <div className="absolute bottom-2 right-2 z-10 bg-black/50 text-white px-2 py-1 text-xs rounded font-mono text-center">
-        <div className="font-bold mb-0.5">Swift4D</div>
-        <div>XXMB, 0.XXX</div>
       </div>
       <Comparison client:visible>
         <video slot="itemOne" className="w-full h-full object-cover" autoPlay loop muted playsInline>
-          <source src="/vru_2_ours.mp4" type="video/mp4" />
+          <source src="/Compact4D-Gaussians/gz40-60_ours.mp4" type="video/mp4" />
         </video>
         <video slot="itemTwo" className="w-full h-full object-cover" autoPlay loop muted playsInline>
-          <source src="/vru_2_swift.mp4" type="video/mp4" />
+          <source src="/Compact4D-Gaussians/vru_2_swift.mp4" type="video/mp4" />
         </video>
       </Comparison>
     </div>
@@ -248,19 +257,15 @@ import dogsMsillm from "@/assets/dogs-msillm.jpg"
     {/* Vru - 视频 3 */}
     <div className="relative aspect-video">
       <div className="absolute top-2 left-2 z-10 bg-black/50 text-white px-2 py-1 text-xs rounded font-mono text-center">
-        <div className="font-bold mb-0.5">Ours-Lite</div>
-        <div>XXMB, 0.XXX</div>
       </div>
       <div className="absolute bottom-2 right-2 z-10 bg-black/50 text-white px-2 py-1 text-xs rounded font-mono text-center">
-        <div className="font-bold mb-0.5">Swift4D</div>
-        <div>XXMB, 0.XXX</div>
       </div>
       <Comparison client:visible>
         <video slot="itemOne" className="w-full h-full object-cover" autoPlay loop muted playsInline>
-          <source src="/vru_3_ours.mp4" type="video/mp4" />
+          <source src="/Compact4D-Gaussians/gz230-250_ours.mp4" type="video/mp4" />
         </video>
         <video slot="itemTwo" className="w-full h-full object-cover" autoPlay loop muted playsInline>
-          <source src="/vru_3_swift.mp4" type="video/mp4" />
+          <source src="/Compact4D-Gaussians/vru_3_swift.mp4" type="video/mp4" />
         </video>
       </Comparison>
     </div>
@@ -273,13 +278,25 @@ import dogsMsillm from "@/assets/dogs-msillm.jpg"
 
 
 <HighlightedSection>
-## Abstract
+{/* 这里的 margin-bottom (mb-18) 是为了和下面的内容拉开距离 */}
+<div className="mb-18">
+  
+  {/* 1. 标题居中 (text-center) */}
+  <h2 className="text-3xl font-bold text-center mb-6">Abstract</h2>
 
-<div className="text-justify">
-3D Gaussian Splatting (3DGS) has emerged as a pioneering approach for novel view synthesis, catalyzing significant research into dynamic scene representation. However, modeling dynamic scenes with 4DGS requires a large number of Gaussians to capture temporal dynamics, resulting in massive storage, which hinders practical applicability. To address this challenge, we propose a novel compaction framework specifically designed for 4DGS. Our key insight is to decouple the compaction strategies for static and dynamic components, which balances storage efficiency and temporal fidelity. Specifically, we introduce a Dynamic-Aware Adaptive Sparsification strategy, which incorporates a motion saliency attention mechanism into the optimization-driven pruning process, assigning higher retention priority to motion-dependent Gaussians to prevent detail loss. Furthermore, we devise a Static-Aware Merging technique to consolidate spatially redundant primitives specifically within the static background, strictly preserving dynamic elements to ensure temporal consistency. Extensive experiments demonstrate that our method significantly reduces storage requirements for dynamic scenes while maintaining high-quality rendering performance.
+  {/* 2. 正文容器：
+         max-w-4xl: 限制最大宽度，不让文字太宽，更易阅读
+         mx-auto:   让整个文本块在屏幕中间居中
+         text-justify: 让文字两端对齐
+  */}
+  <div className="text-justify max-w-4xl mx-auto text-lg">
+    3D Gaussian Splatting (3DGS) has emerged as a pioneering approach for novel view synthesis, catalyzing significant research into dynamic scene representation. However, modeling dynamic scenes with 4DGS requires a large number of Gaussians to capture temporal dynamics, resulting in massive storage, which hinders practical applicability. To address this challenge, we propose a novel compaction framework specifically designed for 4DGS. Our key insight is to decouple the compaction strategies for static and dynamic components, which balances storage efficiency and temporal fidelity. Specifically, we introduce a Dynamic-Aware Adaptive Sparsification strategy, which incorporates a motion saliency attention mechanism into the optimization-driven pruning process, assigning higher retention priority to motion-dependent Gaussians to prevent detail loss. Furthermore, we devise a Static-Aware Merging technique to consolidate spatially redundant primitives specifically within the static background, strictly preserving dynamic elements to ensure temporal consistency. Extensive experiments demonstrate that our method significantly reduces storage requirements for dynamic scenes while maintaining high-quality rendering performance.
+  </div>
+
 </div>
 
 </HighlightedSection>
+
 
 ## Method Overview
 
@@ -296,6 +313,120 @@ import dogsMsillm from "@/assets/dogs-msillm.jpg"
     </div>
   </Fragment>
 </Figure>
+
+## Visual Comparisons
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+    
+    {/* ================= 第一行 (保持 16:9) ================= */}
+    
+    {/* === Beef === */}
+    <div className="relative aspect-video bg-black rounded-lg overflow-hidden group">
+      <div className="absolute bottom-2 left-2 z-10 bg-black/60 text-white px-2 py-1 text-xs rounded font-mono text-center border border-white/20">
+        <div className="font-bold mb-0.5">Ours</div>
+        <div>50k points</div>
+      </div>
+      <div className="absolute bottom-2 right-2 z-10 bg-black/60 text-white px-2 py-1 text-xs rounded font-mono text-center border border-white/20">
+        <div className="font-bold mb-0.5">Swift4D</div>
+        <div>251k points</div>
+      </div>
+      <Comparison client:visible>
+        <img slot="itemOne" src={beefOurs.src} className="w-full h-full object-contain bg-black" />
+        <img slot="itemTwo" src={beefSwift.src} className="w-full h-full object-contain bg-black" />
+      </Comparison>
+    </div>
+
+    {/* === Coffee === */}
+    <div className="relative aspect-video bg-black rounded-lg overflow-hidden group">
+      <div className="absolute bottom-2 left-2 z-10 bg-black/60 text-white px-2 py-1 text-xs rounded font-mono text-center border border-white/20">
+        <div className="font-bold mb-0.5">Ours</div>
+        <div>76k points</div>
+      </div>
+      <div className="absolute bottom-2 right-2 z-10 bg-black/60 text-white px-2 py-1 text-xs rounded font-mono text-center border border-white/20">
+        <div className="font-bold mb-0.5">Swift4D</div>
+        <div>435k points</div>
+      </div>
+      <Comparison client:visible>
+        <img slot="itemOne" src={coffeeOurs.src} className="w-full h-full object-contain bg-black" />
+        <img slot="itemTwo" src={coffeeSwift.src} className="w-full h-full object-contain bg-black" />
+      </Comparison>
+    </div>
+
+
+    {/* ================= 第二行 (修改为 2.35:1 宽屏比例) ================= */}
+    
+    {/* === Discussion (改了这里: aspect-[2.35/1]) === */}
+    <div className="relative aspect-[2.35/1] bg-black rounded-lg overflow-hidden group">
+      <div className="absolute bottom-2 left-2 z-10 bg-black/60 text-white px-2 py-1 text-xs rounded font-mono text-center border border-white/20">
+        <div className="font-bold mb-0.5">Ours</div>
+        <div>26k points</div>
+      </div>
+      <div className="absolute bottom-2 right-2 z-10 bg-black/60 text-white px-2 py-1 text-xs rounded font-mono text-center border border-white/20">
+        <div className="font-bold mb-0.5">Swift4D</div>
+        <div>126k points</div>
+      </div>
+      <Comparison client:visible>
+        <img slot="itemOne" src={discussionOurs.src} className="w-full h-full object-contain bg-black" />
+        <img slot="itemTwo" src={discussionSwift.src} className="w-full h-full object-contain bg-black" />
+      </Comparison>
+    </div>
+
+    {/* === Trimming (改了这里: aspect-[2.35/1]) === */}
+    <div className="relative aspect-[2.35/1] bg-black rounded-lg overflow-hidden group">
+      <div className="absolute bottom-2 left-2 z-10 bg-black/60 text-white px-2 py-1 text-xs rounded font-mono text-center border border-white/20">
+        <div className="font-bold mb-0.5">Ours</div>
+        <div>21k points</div>
+      </div>
+      <div className="absolute bottom-2 right-2 z-10 bg-black/60 text-white px-2 py-1 text-xs rounded font-mono text-center border border-white/20">
+        <div className="font-bold mb-0.5">Swift4D</div>
+        <div>102k points</div>
+      </div>
+      <Comparison client:visible>
+        <img slot="itemOne" src={trimmingOurs.src} className="w-full h-full object-contain bg-black" />
+        <img slot="itemTwo" src={trimmingSwift.src} className="w-full h-full object-contain bg-black" />
+      </Comparison>
+    </div>
+
+
+    {/* ================= 第三行 (保持 16:9) ================= */}
+    
+    {/* === GZ1 === */}
+    <div className="relative aspect-video bg-black rounded-lg overflow-hidden group">
+      <div className="absolute bottom-2 left-2 z-10 bg-black/60 text-white px-2 py-1 text-xs rounded font-mono text-center border border-white/20">
+        <div className="font-bold mb-0.5">Ours</div>
+        <div>94k points</div>
+      </div>
+      <div className="absolute bottom-2 right-2 z-10 bg-black/60 text-white px-2 py-1 text-xs rounded font-mono text-center border border-white/20">
+        <div className="font-bold mb-0.5">Swift4D</div>
+        <div>493k points</div>
+      </div>
+      <Comparison client:visible>
+        <img slot="itemOne" src={gz1Ours.src} className="w-full h-full object-contain bg-black" />
+        <img slot="itemTwo" src={gz1Swift.src} className="w-full h-full object-contain bg-black" />
+      </Comparison>
+    </div>
+
+    {/* === GZ2 === */}
+    <div className="relative aspect-video bg-black rounded-lg overflow-hidden group">
+      <div className="absolute bottom-2 left-2 z-10 bg-black/60 text-white px-2 py-1 text-xs rounded font-mono text-center border border-white/20">
+        <div className="font-bold mb-0.5">Ours</div>
+        <div>106k points</div>
+      </div>
+      <div className="absolute bottom-2 right-2 z-10 bg-black/60 text-white px-2 py-1 text-xs rounded font-mono text-center border border-white/20">
+        <div className="font-bold mb-0.5">Swift4D</div>
+        <div>495k points</div>
+      </div>
+      <Comparison client:visible>
+        <img slot="itemOne" src={gz2Ours.src} className="w-full h-full object-contain bg-black" />
+        <img slot="itemTwo" src={gz2Swift.src} className="w-full h-full object-contain bg-black" />
+      </Comparison>
+    </div>
+
+</div>
+
+<p className="text-justify text-gray-500 text-sm mt-4 mb-8">
+  **Visual comparison of point clouds.** Our method (left) achieves comparable visual quality to Swift4D (right) while using significantly fewer Gaussians. The point count for each method is displayed in the bottom corners.
+</p>
 
 
 ## BibTeX citation
